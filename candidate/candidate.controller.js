@@ -16,7 +16,7 @@ const addCandidate = async (req, res) => {
       firstName, lastName, userId, email,
     } = req.body;
     await candidateValidation.validateAsync(req.body);
-    await candidateService.addcandidate({
+    await candidateService.addCandidate({
       firstName, lastName, userId, email,
     });
     res.send('candidate added Sucessfully');
@@ -25,43 +25,23 @@ const addCandidate = async (req, res) => {
   }
 };
 
-// const getEmployeeById = async(req,res)=>{
-//   try {
-//   const {id} = req.params
-//   const employee = await employeeService.getEmployeeById({id})
-//   res.send(employee)
-//   }catch(err){
-//     throw new Error(err)
-//   }
-// }
-
-// const updateEmployee = async(req,res)=>{
-//   try{
-//     const {id} = req.params;
-//     const {firstName,lastName,age,desig,depart} = req.body;
-//     const result = await employeeService.updateEmployee({id},{
-// firstName,
-// lastName,
-// age,
-// desig,
-// depart});
-//     res.send(result);
-//   }catch(err){
-//     throw new Error(err);
-//   }
-// }
-
-// const deleteEmployee = async (req,res)=>{
-//   try{
-//     const {id} = req.params;
-//     await employeeService.deleteEmployee({id});
-//     res.send("Employee deleted sucessfully");
-//   }catch(err){
-//     throw new Error(err)
-//   }
-// }
+const updateCandidate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { firstName, lastName, email } = req.body;
+    const result = await candidateService.updateCandidate({ id }, {
+      firstName,
+      lastName,
+      email,
+    });
+    res.send(result);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 module.exports = {
   getCandidateList,
   addCandidate,
+  updateCandidate,
 };

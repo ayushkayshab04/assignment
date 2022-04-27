@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
+const { auth } = require('../middleware/auth');
 
 const route = express.Router({ mergeParams: true });
 const Controller = require('./login.controller');

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const candidateService = require('./login.service');
 
 const candidateRegistration = async (req, res) => {
