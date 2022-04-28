@@ -40,8 +40,19 @@ const updateCandidate = async (req, res) => {
   }
 };
 
+const deleteCandidate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await candidateService.deleteCandidate({ id });
+    res.send('Candidate deleted sucessfully');
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   getCandidateList,
   addCandidate,
   updateCandidate,
+  deleteCandidate,
 };

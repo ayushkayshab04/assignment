@@ -5,7 +5,7 @@ const getCandidateList = async () => {
   const conn = await mysqlManager.getConnection();
   const query = 'select * from candidates';
 
-  const [rows] = await conn.execute(query);
+  const [[rows]] = await conn.execute(query);
   return rows;
 };
 
@@ -31,8 +31,16 @@ const updateCandidate = async ({ id }, {
   await conn.execute(query);
 };
 
+const deleteCandidate = async ({ id }) => {
+  const conn = await mysqlManager.getConnection();
+  const query = `DELETE FROM ayush.candidates
+  WHERE candidate_id=${id}`;
+  await conn.execute(query);
+};
+
 module.exports = {
   getCandidateList,
   addCandidate,
   updateCandidate,
+  deleteCandidate,
 };

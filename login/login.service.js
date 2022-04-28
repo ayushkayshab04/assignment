@@ -3,12 +3,12 @@
 const { mysqlManager } = require('../manager/index');
 
 const register = async ({
-  firstName, LastName, email, phoneNo, userType,
+  firstName, lastName, email, phoneNo, password,
 }) => {
   const conn = await mysqlManager.getConnection();
   const query = `INSERT INTO ayush.users
-  (first_name, last_name, email, phone_no, user_type)
-  VALUES('${firstName}', '${LastName}', '${email}', '${phoneNo}', '${userType}')`;
+  (first_name, last_name, email, phone_no, password)
+  VALUES('${firstName}', '${lastName}', '${email}', '${phoneNo}', '${password}')`;
   await conn.execute(query);
 };
 

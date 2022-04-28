@@ -5,6 +5,7 @@ const candidateValidation = Joi.object({
   lastName: Joi.string().required(),
   userId: Joi.number().required(),
   email: Joi.string().required().email(),
+  password: Joi.string().required(),
 });
 
 module.exports = {

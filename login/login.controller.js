@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 
-const candidateService = require('./login.service');
+const userService = require('./login.service');
 
-const candidateRegistration = async (req, res) => {
+const userRegistration = async (req, res) => {
   try {
     const {
-      firstName, LastName, email, phoneNo, userType,
+      firstName, lastName, email, phoneNo, token, password,
     } = req.body;
-    await candidateService.register({
-      firstName, LastName, email, phoneNo, userType,
+    await userService.register({
+      firstName, lastName, email, phoneNo, token, password,
     });
     res.send('User created sucessfully');
   } catch (err) {
@@ -21,6 +21,6 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-  candidateRegistration,
+  userRegistration,
   login,
 };
