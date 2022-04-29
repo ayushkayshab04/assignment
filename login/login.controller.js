@@ -17,7 +17,11 @@ const userRegistration = async (req, res) => {
 };
 
 const login = async (req, res) => {
-
+  try {
+    await userService.login();
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 module.exports = {

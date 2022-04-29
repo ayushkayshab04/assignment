@@ -5,7 +5,7 @@ const getCandidateList = async () => {
   const conn = await mysqlManager.getConnection();
   const query = 'select * from candidates';
 
-  const [[rows]] = await conn.execute(query);
+  const [rows] = await conn.execute(query);
   return rows;
 };
 
@@ -26,7 +26,7 @@ const updateCandidate = async ({ id }, {
   const conn = await mysqlManager.getConnection();
   const query = `UPDATE candidates
     SET first_name='${firstName}', last_name='${lastName}',
-    email='${email}'
+    email='${email}';
     WHERE candidate_id=${id}`;
   await conn.execute(query);
 };

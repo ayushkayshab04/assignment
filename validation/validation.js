@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const Joi = require('joi');
 
 const candidateValidation = Joi.object({
@@ -8,6 +9,11 @@ const candidateValidation = Joi.object({
   password: Joi.string().required(),
 });
 
+const idValidation = Joi.object({
+  id: Joi.number().required(),
+});
+
 module.exports = {
   candidateValidation,
+  idValidation,
 };

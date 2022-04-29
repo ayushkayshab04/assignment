@@ -13,27 +13,22 @@ const authenticate = async (req, res, next) => {
     const decode = jwt.verify(token, secret_key);
     console.log(decode);
     const conn = await mysqlManager.getConnection();
-    const query = `select email , password from users where user_id = ${decode.userId}`;
+    const query = `select email from users where user_id = '${decode.email}'`;
     const [[rows]] = await conn.execute(query);
-    if (!rows.email) {
-      res.send('unauthorized User!!!!!!!');
-    } else {
-      next();
-    }
+    if (!rows.email) { next(); }
   } catch (err) {
     throw new Error(err);
   }
 };
 
 const generateAuthToken = async (req, res, next) => {
-  const conn = await mysqlManager.getConnection();
-  const { id } = req.params;
-  const token = jwt.sign(req.body, secret_key);
-  const query = `UPDATE users
-  SET  token='${token}'
-  WHERE user_id=${id};`;
-  await conn.execute(query);
-  res.send(token);
+  try {
+    const { email } = req.body;
+    const token = jwt.sign({ email }, secret_key);
+    res.send(token);
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 module.exports = {

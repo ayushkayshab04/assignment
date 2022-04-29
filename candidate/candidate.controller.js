@@ -1,5 +1,5 @@
 const candidateService = require('./candidate.service');
-const { candidateValidation } = require('./candidate.validation');
+const { idValidation, candidateValidation } = require('../validation/validation');
 
 const getCandidateList = async (req, res) => {
   try {
@@ -29,6 +29,8 @@ const updateCandidate = async (req, res) => {
   try {
     const { id } = req.params;
     const { firstName, lastName, email } = req.body;
+    await candidateValidation.validateAsync(req.body);
+    await idValidation.validateAsync(id);
     const result = await candidateService.updateCandidate({ id }, {
       firstName,
       lastName,
@@ -43,6 +45,7 @@ const updateCandidate = async (req, res) => {
 const deleteCandidate = async (req, res) => {
   try {
     const { id } = req.params;
+    await idValidation.validateAsync(id);
     await candidateService.deleteCandidate({ id });
     res.send('Candidate deleted sucessfully');
   } catch (err) {

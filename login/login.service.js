@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable quotes */
+const res = require('express/lib/response');
 const { mysqlManager } = require('../manager/index');
 
 const register = async ({
@@ -12,6 +13,11 @@ const register = async ({
   await conn.execute(query);
 };
 
+const login = async () => {
+  res.send("Login Sucessfull");
+};
+
 module.exports = {
   register,
+  login,
 };
