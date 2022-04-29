@@ -5,7 +5,7 @@ const { authenticate, generateAuthToken } = require('../middleware/auth');
 const route = express.Router({ mergeParams: true });
 const Controller = require('./login.controller');
 
-route.post('/register', Controller.userRegistration);
-route.post('/login/:id', generateAuthToken);
+route.post('/register', generateAuthToken, Controller.userRegistration);
+route.post('/login', authenticate, Controller.login);
 
 module.exports = route;

@@ -5,10 +5,10 @@ const userService = require('./login.service');
 const userRegistration = async (req, res) => {
   try {
     const {
-      firstName, lastName, email, phoneNo, token, password,
+      firstName, lastName, email, phoneNo, password,
     } = req.body;
     await userService.register({
-      firstName, lastName, email, phoneNo, token, password,
+      firstName, lastName, email, phoneNo, password,
     });
     res.send('User created sucessfully');
   } catch (err) {
@@ -18,7 +18,7 @@ const userRegistration = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    await userService.login();
+    await userService.login(req, res);
   } catch (err) {
     throw new Error(err);
   }
