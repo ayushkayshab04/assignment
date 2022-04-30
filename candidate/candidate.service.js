@@ -9,6 +9,15 @@ const getCandidateList = async () => {
   return rows;
 };
 
+const addAvatar = async ({ id }, { filename }) => {
+  const conn = await mysqlManager.getConnection();
+  const query = `UPDATE ayush.candidates
+  SET file='${filename}'
+  WHERE candidate_id=${id};
+  `;
+  await conn.execute(query);
+};
+
 const addCandidate = async ({
   firstName, lastName, email, userId,
 }) => {
@@ -40,6 +49,7 @@ const deleteCandidate = async ({ id }) => {
 
 module.exports = {
   getCandidateList,
+  addAvatar,
   addCandidate,
   updateCandidate,
   deleteCandidate,

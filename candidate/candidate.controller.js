@@ -1,10 +1,22 @@
 const candidateService = require('./candidate.service');
-const { idValidation, candidateValidation } = require('../validation/validation');
+const { idValidation, candidateValidation, fileNameValidation } = require('../validation/validation');
 
 const getCandidateList = async (req, res) => {
   try {
     const candidateList = await candidateService.getCandidateList();
     res.send(candidateList);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const addAvatar = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { filename } = req.body.filename;
+    await fileNameValidation.validateAsync({ filename });
+    await candidateService.addAvatar({ id }, { filename });
+    res.send('Image insertion Sucessfull');
   } catch (err) {
     throw new Error(err);
   }
@@ -55,6 +67,7 @@ const deleteCandidate = async (req, res) => {
 
 module.exports = {
   getCandidateList,
+  addAvatar,
   addCandidate,
   updateCandidate,
   deleteCandidate,

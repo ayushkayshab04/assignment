@@ -31,7 +31,12 @@ const addressValidation = Joi.object({
   zip: Joi.string().required(),
 });
 
+const fileNameValidation = Joi.object({
+  filename: Joi.string().required(),
+});
+
 module.exports = {
+  fileNameValidation,
   candidateValidation,
   idValidation,
   tokenValidation,
