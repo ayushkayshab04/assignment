@@ -14,11 +14,11 @@ const register = async ({
   await conn.execute(query);
 };
 
-const login = async (req, res) => {
-  res.send(`Login sucessfull `);
-};
+// const login = async (req, res) => {
+//   res.send("Login sucessfull");
+// };
 
 module.exports = {
   register,
-  login,
+  // login,
 };

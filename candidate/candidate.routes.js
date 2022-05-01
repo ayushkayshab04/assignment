@@ -3,15 +3,15 @@ const express = require('express');
 const multer = require('multer');
 
 const upload = multer({ dest: 'uploads/' });
-// const { authenticate } = require('../middleware/auth');
+const { authenticate } = require('../middleware/auth');
 
 const route = express.Router({ mergeParams: true });
 const Controller = require('./candidate.controller');
 
-route.get('/', Controller.getCandidateList);
-route.post('/add', Controller.addCandidate);
-route.post('/uploadPic', upload.single('avatar'), Controller.addAvatar);
-route.put('/update', Controller.updateCandidate);
-route.delete('/delete', Controller.deleteCandidate);
+route.get('/', authenticate, Controller.getCandidateList);
+route.post('/add', authenticate, Controller.addCandidate);
+route.post('/uploadPic/:id', authenticate, upload.single('avatar'), Controller.addAvatar);
+route.put('/update', authenticate, Controller.updateCandidate);
+route.delete('/delete', authenticate, Controller.deleteCandidate);
 
 module.exports = route;

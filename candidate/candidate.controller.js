@@ -1,5 +1,5 @@
 const candidateService = require('./candidate.service');
-const { idValidation, candidateValidation, fileNameValidation } = require('../validation/validation');
+const { idValidation, candidateValidation, fileNameValidation } = require('../validation/index');
 
 const getCandidateList = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ const getCandidateList = async (req, res) => {
 const addAvatar = async (req, res) => {
   try {
     const { id } = req.params;
-    const { filename } = req.body.filename;
+    const { filename } = req.body;
     await fileNameValidation.validateAsync({ filename });
     await candidateService.addAvatar({ id }, { filename });
     res.send('Image insertion Sucessfull');

@@ -6,6 +6,13 @@ const candidateValidation = Joi.object({
   lastName: Joi.string().required(),
   userId: Joi.number().required(),
   email: Joi.string().required().email(),
+});
+
+const userValidation = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  email: Joi.string().required().email(),
+  phoneNo: Joi.string().required(),
   password: Joi.string().required(),
 });
 
@@ -38,6 +45,7 @@ const fileNameValidation = Joi.object({
 module.exports = {
   fileNameValidation,
   candidateValidation,
+  userValidation,
   idValidation,
   tokenValidation,
   emailValidation,

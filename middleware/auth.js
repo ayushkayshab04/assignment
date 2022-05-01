@@ -24,13 +24,27 @@ const authenticate = async (req, res, next) => {
   }
 };
 
+const userExist = async ({ email, password }) => {
+  try {
+    const conn = await mysqlManager.getConnection();
+    const query = `select email,password from users where email = '${email}'`;
+    const [[rows]] = await conn.execute(query);
+    if ((rows.email && rows.password) === (email && password)) { return true; }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 const generateAuthToken = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     await emailValidation.validateAsync({ email, password });
-    const token = jwt.sign({ email, password }, secret_key);
-    res.send(token);
-    next();
+    const result = await userExist({ email, password });
+    if (result === true) {
+      const token = jwt.sign({ email, password }, secret_key);
+      res.send(token);
+      next();
+    }
   } catch (err) {
     throw new Error(err);
   }

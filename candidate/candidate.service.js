@@ -11,7 +11,7 @@ const getCandidateList = async () => {
 
 const addAvatar = async ({ id }, { filename }) => {
   const conn = await mysqlManager.getConnection();
-  const query = `UPDATE ayush.candidates
+  const query = `UPDATE candidates
   SET file='${filename}'
   WHERE candidate_id=${id};
   `;
