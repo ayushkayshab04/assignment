@@ -9,6 +9,13 @@ const getCandidateList = async () => {
   return rows;
 };
 
+const getCandidate = async ({ id }) => {
+  const conn = await mysqlManager.getConnection();
+  const query = `select * from candidates where candidate_id = ${id}`;
+  const [rows] = await conn.execute(query);
+  return rows;
+};
+
 const getFile = async ({ id }) => {
   const conn = await mysqlManager.getConnection();
   const query = `select file from candidates where user_id=${id}`;
@@ -56,6 +63,7 @@ const deleteCandidate = async ({ id }) => {
 
 module.exports = {
   getCandidateList,
+  getCandidate,
   getFile,
   addAvatar,
   addCandidate,

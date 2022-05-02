@@ -10,6 +10,17 @@ const getCandidateList = async (req, res) => {
   }
 };
 
+const getCandidate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await idValidation.validateAsync({ id });
+    const candidate = await candidateService.getCandidate({ id });
+    res.send(candidate);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 const getFile = async (req, res) => {
   try {
     const { id } = req.params;
@@ -78,6 +89,7 @@ const deleteCandidate = async (req, res) => {
 
 module.exports = {
   getCandidateList,
+  getCandidate,
   getFile,
   addAvatar,
   addCandidate,
