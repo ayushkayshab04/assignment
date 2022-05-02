@@ -8,7 +8,7 @@ const { authenticate } = require('../middleware/auth');
 const route = express.Router({ mergeParams: true });
 const Controller = require('./candidate.controller');
 
-route.get('/', authenticate, Controller.getCandidateList);
+route.get('/', Controller.getCandidateList);
 route.get('/file/:id', authenticate, Controller.getFile);
 route.post('/add', authenticate, Controller.addCandidate);
 route.post('/uploadPic/:id', authenticate, upload.single('avatar'), Controller.addAvatar);
